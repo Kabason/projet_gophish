@@ -1,0 +1,134 @@
+{
+  "best_model": "random_forest",
+  "accuracy_by_type": {
+    "naive_bayes": {
+      "enron_ham": {
+        "accuracy": 0.95,
+        "n": 60
+      },
+      "nazario_real_phishing": {
+        "accuracy": 0.975,
+        "n": 79
+      },
+      "ai_phishing_2026": {
+        "accuracy": 1.0,
+        "n": 61
+      }
+    },
+    "random_forest": {
+      "enron_ham": {
+        "accuracy": 0.983,
+        "n": 60
+      },
+      "nazario_real_phishing": {
+        "accuracy": 0.962,
+        "n": 79
+      },
+      "ai_phishing_2026": {
+        "accuracy": 1.0,
+        "n": 61
+      }
+    },
+    "logistic_regression": {
+      "enron_ham": {
+        "accuracy": 0.967,
+        "n": 60
+      },
+      "nazario_real_phishing": {
+        "accuracy": 0.975,
+        "n": 79
+      },
+      "ai_phishing_2026": {
+        "accuracy": 1.0,
+        "n": 61
+      }
+    }
+  },
+  "accuracy_by_language": {
+    "naive_bayes": {
+      "en": {
+        "accuracy": 0.962,
+        "n": 133
+      },
+      "vi": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "fr": {
+        "accuracy": 1.0,
+        "n": 62
+      },
+      "ca": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "pt": {
+        "accuracy": 1.0,
+        "n": 2
+      },
+      "et": {
+        "accuracy": 1.0,
+        "n": 1
+      }
+    },
+    "random_forest": {
+      "en": {
+        "accuracy": 0.977,
+        "n": 133
+      },
+      "vi": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "fr": {
+        "accuracy": 1.0,
+        "n": 62
+      },
+      "ca": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "pt": {
+        "accuracy": 0.5,
+        "n": 2
+      },
+      "et": {
+        "accuracy": 1.0,
+        "n": 1
+      }
+    },
+    "logistic_regression": {
+      "en": {
+        "accuracy": 0.97,
+        "n": 133
+      },
+      "vi": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "fr": {
+        "accuracy": 1.0,
+        "n": 62
+      },
+      "ca": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "pt": {
+        "accuracy": 1.0,
+        "n": 2
+      },
+      "et": {
+        "accuracy": 1.0,
+        "n": 1
+      }
+    }
+  },
+  "detection_rate_by_tactic": {
+    "autorite": 100.0,
+    "reciprocite": 100.0,
+    "urgence": 100.0,
+    "routine": 100.0,
+    "curiosite": 100.0
+  }
+}

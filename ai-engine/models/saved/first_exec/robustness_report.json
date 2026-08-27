@@ -1,0 +1,27 @@
+{
+  "best_model": "logistic_regression",
+  "f1_by_type": {
+    "naive_bayes": {
+      "enron_ham": 0.0,
+      "nazario_real_phishing": 0.987,
+      "ai_phishing_2026": 1.0
+    },
+    "random_forest": {
+      "enron_ham": 0.0,
+      "nazario_real_phishing": 0.981,
+      "ai_phishing_2026": 1.0
+    },
+    "logistic_regression": {
+      "enron_ham": 0.0,
+      "nazario_real_phishing": 0.987,
+      "ai_phishing_2026": 1.0
+    }
+  },
+  "detection_rate_by_tactic": {
+    "autorite": 100.0,
+    "reciprocite": 100.0,
+    "urgence": 100.0,
+    "routine": 100.0,
+    "curiosite": 100.0
+  }
+}
