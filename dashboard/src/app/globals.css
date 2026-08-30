@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* Append everything below to the bottom of the globals.css that
+   create-next-app already generated - don't replace the file,
+   it already has the Tailwind import/directives at the top. */
+
+:root,
+[data-theme="dark"] {
+  --bg: #0B0F14;
+  --surface: #131920;
+  --surface-2: #0B0F14;
+  --border: #232B36;
+  --text: #E6EDF3;
+  --text-secondary: #8B98A5;
+  --text-muted: #4A5560;
+  --accent: #F0B429;
+  --accent-contrast: #0B0F14;
+  --danger: #E5484D;
+  --danger-bg: rgba(229, 72, 77, 0.1);
+  --safe: #3FB950;
+  --safe-bg: rgba(63, 185, 80, 0.1);
+}
+
+[data-theme="light"] {
+  --bg: #FAFAF8;
+  --surface: #FFFFFF;
+  --surface-2: #F3F4F1;
+  --border: #E2E5E9;
+  --text: #14181F;
+  --text-secondary: #5B6672;
+  --text-muted: #9AA3AD;
+  --accent: #9A6B00;
+  --accent-contrast: #FFFFFF;
+  --danger: #C22C31;
+  --danger-bg: rgba(194, 44, 49, 0.08);
+  --safe: #1F7A34;
+  --safe-bg: rgba(31, 122, 52, 0.08);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+:root {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-body {
+  font-family: var(--font-body);
+}
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Signature element: a scanning line that sweeps down the email
+   textarea while a request is in flight - a threat-scan motif that
+   fits the subject instead of a generic spinner. */
+@keyframes scan-line {
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: scan-line 1.4s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-line {
+    animation: none;
+    opacity: 0.4;
+  }
+}
