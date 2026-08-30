@@ -10,10 +10,10 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Node / Next.js
-dashboard/node_modules/
-dashboard/.next/
-dashboard/out/
-dashboard/.env*.local
+# dashboard/node_modules/
+# dashboard/.next/
+# dashboard/out/
+# dashboard/.env*.local
 
 # Data - do not commit raw/processed datasets
 data/raw/*.csv
