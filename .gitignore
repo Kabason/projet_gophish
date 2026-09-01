@@ -16,8 +16,8 @@ __pycache__/
 # dashboard/.env*.local
 
 # Data - do not commit raw/processed datasets
-data/raw/*.csv
-data/processed/*.csv
+# data/raw/*.csv
+# data/processed/*.csv
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 
@@ -33,3 +33,4 @@ Thumbs.db
 
 setup_project.ps1
 steps.txt
+"data/raw/*.csv" 
