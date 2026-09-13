@@ -3,9 +3,24 @@
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
+export type FeatureContribution = {
+  term: string;
+  weight: number;
+  direction: "phishing" | "legitimate";
+};
+
+export type ModelVote = {
+  model: string;
+  prediction: "phishing" | "legitimate";
+  confidence: number;
+};
+
 export type PredictResponse = {
   prediction: "phishing" | "legitimate";
   confidence: number;
+  model_used: string;
+  top_features: FeatureContribution[];
+  model_comparison: ModelVote[];
 };
 
 export type ModelMetrics = {
@@ -26,7 +41,7 @@ export type Robustness = {
   best_model: string;
   accuracy_by_type: Record<string, Record<string, AccuracyEntry>>;
   accuracy_by_language: Record<string, Record<string, AccuracyEntry>>;
-  detection_rate_by_tactic: Record<string, number>;
+    detection_rate_by_tactic: Record<string, { rate: number; n: number }>;
 };
 
 export type MetricsResponse = {

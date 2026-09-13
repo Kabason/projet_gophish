@@ -40,13 +40,18 @@ def main():
 
     df = pd.read_csv(INPUT_PATH).dropna(subset=["clean_text"])
 
-    vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 2))
-    X = vectorizer.fit_transform(df["clean_text"])
     y = df["label"]
 
-    X_train, X_test, y_train, y_test, type_train, type_test = train_test_split(
-        X, y, df["type"], test_size=0.2, random_state=42, stratify=y
+    text_train, text_test, y_train, y_test, type_train, type_test = train_test_split(
+        df["clean_text"], y, df["type"], test_size=0.2, random_state=42, stratify=y
     )
+
+    # Le vectoriseur apprend le vocabulaire UNIQUEMENT sur le train,
+    # puis on applique ce meme vocabulaire au test (fit sur train, transform sur test)
+    # -> evite la fuite d'information du test set dans le vocabulaire TF-IDF
+    vectorizer = TfidfVectorizer(max_features=5000, ngram_range=(1, 2))
+    X_train = vectorizer.fit_transform(text_train)
+    X_test = vectorizer.transform(text_test)
 
     cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 

@@ -10,6 +10,14 @@ combined phishing_email.csv - the combined file also pools in CEAS_08,
 Ling, Nigerian_Fraud and SpamAssassin, which this project's 30/40/30
 recipe (Enron ham / Nazario phishing / AI phishing) doesn't call for.
 
+Also drops rows with corrupted/garbled text (encoding artifacts common
+in the raw Nazario mbox source - binary noise turned into strings like
+"AENF6^10b37002"). These pollute the trained model's top features with
+meaningless tokens rather than real phishing vocabulary, as found via
+SHAP (see explainability/shap_analysis.py) - same failure mode as the
+earlier corpus-name leaks (enron/monkey/vince/kaminski), just from
+encoding noise instead of a proper name.
+
 Manual step before running this:
   1. Download "Phishing Email Dataset" by Naser Abdullah Alam from
      kaggle.com and extract the zip.
@@ -37,12 +45,25 @@ OUTPUT_PATH = RAW_DIR / "enron_nazario_clean.csv"
 # can add the right one here - same advice the project guide gives.
 CANDIDATE_TEXT_COLUMNS = ["text_combined", "text", "body", "Body", "email", "content", "Text"]
 
+# Below this ratio of alphabetic characters to total non-space characters,
+# a row is considered corrupted/garbled encoding noise rather than real text.
+MIN_ALPHA_RATIO = 0.5
+
 
 def detect_lang_safe(text: str) -> str:
     try:
         return detect(str(text)[:500])
     except Exception:
         return "unknown"
+
+
+def is_corrupted(text: str) -> bool:
+    stripped = str(text).replace(" ", "").replace("\n", "").replace("\t", "")
+    if len(stripped) < 20:
+        return False  # too short to judge reliably, let it through
+    alpha_count = sum(c.isalpha() for c in stripped)
+    ratio = alpha_count / len(stripped)
+    return ratio < MIN_ALPHA_RATIO
 
 
 def find_text_column(df: pd.DataFrame, source_name: str) -> str:
@@ -65,6 +86,13 @@ def load_source(path: Path, fixed_label: int, type_name: str) -> pd.DataFrame:
 
     text_col = find_text_column(df_raw, path.name)
     df = df_raw.rename(columns={text_col: "text"})[["text"]].dropna()
+
+    corrupted_mask = df["text"].apply(is_corrupted)
+    n_corrupted = corrupted_mask.sum()
+    if n_corrupted > 0:
+        print(f"  -> Dropping {n_corrupted} corrupted/garbled rows (encoding artifacts, alpha ratio < {MIN_ALPHA_RATIO})")
+    df = df[~corrupted_mask].reset_index(drop=True)
+
     df["label"] = fixed_label
     df["type"] = type_name
     return df

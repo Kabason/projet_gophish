@@ -14,6 +14,15 @@ model. Accuracy (fraction correctly classified) is well-defined
 whether the subset is pure or mixed, and for a pure-positive subset
 it's equivalent to recall/detection rate.
 
+IMPORTANT: the tactic breakdown below is computed on the TEST SPLIT
+ONLY (not the full dataset). Evaluating on the full dataset would
+include AI-phishing rows the model already saw during training,
+inflating detection rates through memorization rather than genuine
+generalization. The trade-off: with ~175 AI-phishing rows total,
+the test split leaves only ~35 rows spread across 5 tactics (a
+handful per tactic) - small sample sizes, documented as a limitation
+rather than papered over with a larger but leaked evaluation set.
+
 Run this after train_models.py.
 
 Usage:
@@ -62,7 +71,7 @@ def main():
         X, y, df.index, test_size=0.2, random_state=42, stratify=y
     )
 
-    df_test = df.loc[test_idx, ["type", "language"]].copy()
+    df_test = df.loc[test_idx, ["type", "language", "tactic"]].copy()
     df_test["true"] = y_test.values
     for name, model in best_models.items():
         df_test[f"pred_{name}"] = model.predict(X_test)
@@ -83,34 +92,31 @@ def main():
         for lang, stats in sorted(acc_by_language[name].items(), key=lambda kv: -kv[1]["n"])[:5]:
             print(f"  {lang}: accuracy = {stats['accuracy']:.3f} (n={stats['n']})")
 
-    # Detectability by psychological tactic, on the FULL dataset (not just the
-    # test split) so there's enough AI-phishing rows per tactic to be meaningful
+    # Detectability by psychological tactic, on the TEST SPLIT ONLY - see module
+    # docstring for why this matters (avoids memorization inflating the result)
     detection_by_tactic = {}
     best_name = max(
         model_names,
         key=lambda n: (df_test["true"] == df_test[f"pred_{n}"]).mean(),
     )
-    if (df["type"] == "ai_phishing_2026").any():
-        df_full = df.copy()
-        X_full = vectorizer.transform(df_full["clean_text"])
-        for name, model in best_models.items():
-            df_full[f"pred_{name}"] = model.predict(X_full)
-
-        df_ai_only = df_full[df_full["type"] == "ai_phishing_2026"]
-        print(f"\n=== Detection rate by tactic (best model: {best_name}) ===")
-        for tactic in df_ai_only["tactic"].dropna().unique():
-            subset = df_ai_only[df_ai_only["tactic"] == tactic]
+    df_ai_test = df_test[df_test["type"] == "ai_phishing_2026"]
+    if len(df_ai_test) > 0:
+        print(f"\n=== Detection rate by tactic on TEST SPLIT ONLY (best model: {best_name}) ===")
+        print(f"[note] n total AI-phishing in test split: {len(df_ai_test)} - small samples per tactic, interpret with caution")
+        for tactic in df_ai_test["tactic"].dropna().unique():
+            subset = df_ai_test[df_ai_test["tactic"] == tactic]
             taux_detection = (subset[f"pred_{best_name}"] == 1).mean() * 100
-            detection_by_tactic[tactic] = round(taux_detection, 1)
+            detection_by_tactic[tactic] = {"rate": round(taux_detection, 1), "n": int(len(subset))}
             print(f"  {tactic}: {taux_detection:.1f}% detected (n={len(subset)})")
     else:
-        print("\n[info] No AI-phishing rows in the dataset yet - tactic breakdown skipped.")
+        print("\n[info] No AI-phishing rows in the test split - tactic breakdown skipped.")
 
     report = {
         "best_model": best_name,
         "accuracy_by_type": acc_by_type,
         "accuracy_by_language": acc_by_language,
         "detection_rate_by_tactic": detection_by_tactic,
+        "detection_by_tactic_methodology": "computed on test split only, not full dataset - see module docstring",
     }
     with open(MODELS_DIR / "robustness_report.json", "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2)

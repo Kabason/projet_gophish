@@ -91,13 +91,15 @@ export default function MetricsPage() {
 
       <Section title="Taux de détection par tactique psychologique (phishing IA)">
         <div className="space-y-2">
-          {Object.entries(tactics).map(([tactic, pct]) => (
+          {Object.entries(tactics).map(([tactic, stats]) => (
             <div key={tactic} className="flex items-center gap-4">
               <div className="w-28 text-sm text-[var(--text-secondary)] font-mono shrink-0">{tactic}</div>
               <div className="flex-1 bg-[var(--surface)] border border-[var(--border)] h-5">
-                <div className="h-full bg-[var(--accent)]" style={{ width: `${pct}%` }} />
+                <div className="h-full bg-[var(--accent)]" style={{ width: `${stats.rate}%` }} />
               </div>
-              <div className="w-14 text-sm font-mono text-right">{pct.toFixed(0)}%</div>
+              <div className="w-20 text-sm font-mono text-right">
+                {stats.rate.toFixed(0)}% <span className="text-[var(--text-muted)]">(n={stats.n})</span>
+              </div>
             </div>
           ))}
         </div>
@@ -148,4 +150,3 @@ function Table({ rows }: { rows: [string, string, string][] }) {
     </div>
   );
 }
-1
