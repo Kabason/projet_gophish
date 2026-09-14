@@ -18,8 +18,8 @@ __pycache__/
 # Data - do not commit raw/processed datasets
 # data/raw/*.csv
 # data/processed/*.csv
-!data/raw/.gitkeep
-!data/processed/.gitkeep
+# !data/raw/.gitkeep
+# !data/processed/.gitkeep
 
 # Trained models
 ai-engine/models/saved/*.pkl
@@ -33,4 +33,4 @@ Thumbs.db
 
 setup_project.ps1
 steps.txt
-"data/raw/*.csv" 
+# "data/raw/*.csv" 
