@@ -34,3 +34,6 @@ Thumbs.db
 setup_project.ps1
 steps.txt
 # "data/raw/*.csv" 
+
+results.txt
+# recapitulatif_session.md

@@ -3,135 +3,147 @@
   "accuracy_by_type": {
     "naive_bayes": {
       "enron_ham": {
-        "accuracy": 0.964,
-        "n": 56
-      },
-      "nazario_real_phishing": {
-        "accuracy": 0.923,
-        "n": 78
+        "accuracy": 0.95,
+        "n": 60
       },
       "ai_phishing_2026": {
         "accuracy": 1.0,
-        "n": 37
+        "n": 58
       },
-      "ham_francais": {
-        "accuracy": 0.5,
-        "n": 4
+      "nazario_real_phishing": {
+        "accuracy": 0.963,
+        "n": 82
       }
     },
     "random_forest": {
       "enron_ham": {
-        "accuracy": 0.911,
-        "n": 56
-      },
-      "nazario_real_phishing": {
-        "accuracy": 0.949,
-        "n": 78
+        "accuracy": 0.917,
+        "n": 60
       },
       "ai_phishing_2026": {
         "accuracy": 1.0,
-        "n": 37
+        "n": 58
       },
-      "ham_francais": {
-        "accuracy": 1.0,
-        "n": 4
+      "nazario_real_phishing": {
+        "accuracy": 0.951,
+        "n": 82
       }
     },
     "logistic_regression": {
       "enron_ham": {
-        "accuracy": 0.964,
-        "n": 56
-      },
-      "nazario_real_phishing": {
-        "accuracy": 0.936,
-        "n": 78
+        "accuracy": 0.933,
+        "n": 60
       },
       "ai_phishing_2026": {
         "accuracy": 1.0,
-        "n": 37
+        "n": 58
       },
-      "ham_francais": {
-        "accuracy": 0.75,
-        "n": 4
+      "nazario_real_phishing": {
+        "accuracy": 0.988,
+        "n": 82
       }
     }
   },
   "accuracy_by_language": {
     "naive_bayes": {
       "en": {
-        "accuracy": 0.939,
-        "n": 131
+        "accuracy": 0.963,
+        "n": 136
       },
       "fr": {
-        "accuracy": 0.951,
-        "n": 41
+        "accuracy": 1.0,
+        "n": 58
       },
-      "vi": {
+      "pt": {
         "accuracy": 1.0,
         "n": 1
       },
-      "zh-cn": {
+      "de": {
+        "accuracy": 0.667,
+        "n": 3
+      },
+      "da": {
         "accuracy": 1.0,
-        "n": 2
+        "n": 1
+      },
+      "tr": {
+        "accuracy": 1.0,
+        "n": 1
       }
     },
     "random_forest": {
       "en": {
-        "accuracy": 0.947,
-        "n": 131
+        "accuracy": 0.949,
+        "n": 136
       },
       "fr": {
         "accuracy": 1.0,
-        "n": 41
+        "n": 58
       },
-      "vi": {
+      "pt": {
         "accuracy": 1.0,
         "n": 1
       },
-      "zh-cn": {
+      "de": {
+        "accuracy": 0.667,
+        "n": 3
+      },
+      "da": {
         "accuracy": 0.0,
-        "n": 2
+        "n": 1
+      },
+      "tr": {
+        "accuracy": 1.0,
+        "n": 1
       }
     },
     "logistic_regression": {
       "en": {
-        "accuracy": 0.962,
-        "n": 131
+        "accuracy": 0.971,
+        "n": 136
       },
       "fr": {
-        "accuracy": 0.976,
-        "n": 41
+        "accuracy": 1.0,
+        "n": 58
       },
-      "vi": {
+      "pt": {
         "accuracy": 1.0,
         "n": 1
       },
-      "zh-cn": {
-        "accuracy": 0.0,
-        "n": 2
+      "de": {
+        "accuracy": 0.667,
+        "n": 3
+      },
+      "da": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "tr": {
+        "accuracy": 1.0,
+        "n": 1
       }
     }
   },
   "detection_rate_by_tactic": {
-    "routine": {
-      "rate": 100.0,
-      "n": 7
-    },
-    "autorite": {
-      "rate": 100.0,
-      "n": 10
-    },
     "urgence": {
       "rate": 100.0,
-      "n": 9
+      "n": 12
     },
     "reciprocite": {
       "rate": 100.0,
-      "n": 3
+      "n": 12
     },
     "curiosite": {
       "rate": 100.0,
-      "n": 8
+      "n": 11
+    },
+    "autorite": {
+      "rate": 100.0,
+      "n": 13
+    },
+    "routine": {
+      "rate": 100.0,
+      "n": 10
     }
   },
   "detection_by_tactic_methodology": "computed on test split only, not full dataset - see module docstring"

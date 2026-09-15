@@ -9,14 +9,14 @@ dataset_hybride_preprocessed.csv.
 Also strips known corpus-identity leakage found via SHAP analysis:
 the model was partly learning to fingerprint WHICH SOURCE FILE an
 email came from rather than genuine phishing/ham content.
-  - "ect" / "hou": Enron corpus internal routing/division codes that
-    appear across a huge share of Enron emails' headers/signatures -
-    an artifact of the corpus, not a property of legitimate email.
-  - "enron": the corpus's own company name leaking in as a ham
-    predictor.
+  - "ect" / "hou": Enron corpus internal routing/division codes.
+  - "enron": the corpus's own company name leaking in as a ham predictor.
+  - "vince" / "kaminski": Vince Kaminski's mailbox dominates the Enron
+    corpus - a well-documented collection artifact, not ham content.
   - bare domain mentions like "monkey.org" (the Nazario corpus's own
-    archive source URL) leaking into email bodies as a phishing
-    predictor, even without a "http://" prefix to catch it.
+    archive source URL), INCLUDING any trailing URL path, since
+    stripping only the domain left fragments like "jose"/"phishing"
+    behind as ordinary word tokens.
 
 Usage:
     python nlp_pipeline.py
@@ -31,25 +31,22 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
-for resource, path in [
-    ("stopwords", "corpora/stopwords"),
-    ("wordnet", "corpora/wordnet"),
-    ("punkt", "tokenizers/punkt"),
-    ("punkt_tab", "tokenizers/punkt_tab"),
-]:
+# nltk.download() checks locally and skips fast if already present, so
+# calling it unconditionally is cheap after the first run. This avoids
+# nltk.data.find()'s pre-check, which can raise OSError (not the
+# LookupError you'd expect) when a resource folder exists but is
+# incomplete - that OSError was crashing the whole module import.
+for resource in ["stopwords", "wordnet", "punkt", "punkt_tab"]:
     try:
-        nltk.data.find(path)
-    except LookupError:
         nltk.download(resource, quiet=True)
+    except Exception as exc:
+        print(f"[warn] Could not verify/download NLTK resource '{resource}': {exc}")
 
 LEMMATIZER = WordNetLemmatizer()
 
-# Corpus-identity artifacts identified via SHAP - not phishing/ham signal,
-# just tells about which source file the row came from. See docstring.
 CORPUS_LEAKAGE_TOKENS = {
     "enron", "ect", "hou",           # Enron corpus header/routing artifacts
-    "vince", "kaminski",             # Enron corpus is dominated by Vince Kaminski's mailbox -
-                                      # a well-documented artifact of this specific dataset
+    "vince", "kaminski",             # Vince Kaminski's mailbox dominates the Enron corpus
     "jose", "nazario", "monkey",     # Nazario corpus citation (Jose Nazario / monkey.org)
     "com", "org",                    # leftover bare-domain fragments as a safety net
 }
@@ -65,9 +62,8 @@ def clean_text(text: str) -> str:
     text = str(text).lower()
     text = re.sub(r"http\S+|www\S+", " URLTOKEN ", text)
     # Bare domain mentions without a protocol prefix, INCLUDING any trailing
-    # URL path (e.g. "monkey.org/~jose/phishing/fraud123.html" - without this,
-    # only "monkey.org" gets stripped and "jose"/"phishing"/"html" leak through
-    # as ordinary word tokens, which is what happened on the first pass).
+    # URL path (e.g. "monkey.org/~jose/phishing/fraud123.html" - without
+    # consuming the path too, fragments like "jose"/"html" leak through).
     text = re.sub(r"\b[a-z0-9-]+\.(com|org|net|fr|gov|edu|info)(/\S*)?", " URLTOKEN ", text)
     text = re.sub(r"\S+@\S+", " EMAILTOKEN ", text)
     text = re.sub(r"[^a-zàâäéèêëïîôöùûüç\s]", " ", text)

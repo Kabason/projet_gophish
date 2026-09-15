@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session en cours de restauration…</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f3f3f3;
+    color: #1b1b1b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  .panel {
+    background: #ffffff;
+    max-width: 460px;
+    width: 100%;
+    padding: 40px 36px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    text-align: center;
+  }
+  .spinner {
+    width: 42px;
+    height: 42px;
+    margin: 0 auto 24px;
+    border: 4px solid #e1e1e1;
+    border-top-color: #0067b8;
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1b1b1b;
+  }
+  p {
+    font-size: 14px;
+    color: #5e5e5e;
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+  .hint {
+    font-size: 13px;
+    color: #8a8886;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #eee;
+  }
+</style>
+</head>
+<body>
+  <div class="panel">
+    <div class="spinner"></div>
+    <h1>Votre session a expiré</h1>
+    <p>Nous rétablissons votre connexion en toute sécurité. Merci de patienter quelques instants…</p>
+    <p>Vous serez redirigé automatiquement.</p>
+    <div class="hint">Ne fermez pas cette fenêtre.</div>
+  </div>
+</body>
+</html>
