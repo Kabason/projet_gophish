@@ -1,0 +1,16 @@
+campaign_id,email,time,message,details
+4,,2026-08-30T05:58:37.960698456Z,Campaign Created,
+4,aminetazi@example.com,2026-08-30T05:58:38.306363418Z,Email Sent,
+4,saraamrani@example.com,2026-08-30T05:58:38.73624337Z,Email Sent,
+4,youssefbenali@example.com,2026-08-30T05:58:38.910922553Z,Email Sent,
+4,fatima.test@local.com,2026-08-30T05:58:39.063942374Z,Email Sent,
+4,karim.test@local.com,2026-08-30T05:58:39.205371325Z,Email Sent,
+4,lina.test@local.com,2026-08-30T05:58:39.318619249Z,Email Sent,
+4,nadia.test@local.com,2026-08-30T05:58:39.568187857Z,Email Sent,
+4,reda.test@local.com,2026-08-30T05:58:39.979334685Z,Email Sent,
+4,saraamrani@example.com,2026-08-30T05:59:28.118150197Z,Clicked Link,"{""payload"":{""rid"":[""zyvAl50""]},""browser"":{""address"":""10.0.2.15"",""user-agent"":""Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0""}}"
+4,saraamrani@example.com,2026-08-30T05:59:55.888804306Z,Submitted Data,"{""payload"":{""password"":[""sarasaratre""],""rid"":[""zyvAl50""],""username"":[""saraamrani@hst.com""]},""browser"":{""address"":""10.0.2.15"",""user-agent"":""Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0""}}"
+4,nadia.test@local.com,2026-08-30T06:01:08.143598148Z,Clicked Link,"{""payload"":{""rid"":[""2TEy4wZ""]},""browser"":{""address"":""10.0.2.15"",""user-agent"":""Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0""}}"
+4,nadia.test@local.com,2026-08-30T06:01:24.198622874Z,Submitted Data,"{""payload"":{""password"":[""nadiaTESRT""],""rid"":[""2TEy4wZ""],""username"":[""nadia.test@local.com""]},""browser"":{""address"":""10.0.2.15"",""user-agent"":""Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0""}}"
+4,reda.test@local.com,2026-08-30T06:01:45.932920086Z,Clicked Link,"{""payload"":{""rid"":[""yJfukxa""]},""browser"":{""address"":""10.0.2.15"",""user-agent"":""Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0""}}"
+4,reda.test@local.com,2026-08-30T06:01:58.563005267Z,Submitted Data,"{""payload"":{""password"":[""redaTest456?""],""rid"":[""yJfukxa""],""username"":[""reda.test@local.com""]},""browser"":{""address"":""10.0.2.15"",""user-agent"":""Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0""}}"

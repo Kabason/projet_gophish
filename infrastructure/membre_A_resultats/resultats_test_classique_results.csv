@@ -1,0 +1,9 @@
+id,status,ip,latitude,longitude,send_date,reported,modified_date,email,first_name,last_name,position
+mTaEssX,Email Sent,,0,0,2026-08-30T05:58:38.306363418Z,false,2026-08-30T05:58:38.306363418Z,aminetazi@example.com,Amine,Tazi,Comptabilité
+zyvAl50,Submitted Data,10.0.2.15,0,0,2026-08-30T05:58:38.73624337Z,false,2026-08-30T05:59:55.888804306Z,saraamrani@example.com,Sara,Amrani,RH
+QZyWSHT,Email Sent,,0,0,2026-08-30T05:58:38.910922553Z,false,2026-08-30T05:58:38.910922553Z,youssefbenali@example.com,Youssef,Benali,IT
+Sy2v54r,Email Sent,,0,0,2026-08-30T05:58:39.063942374Z,false,2026-08-30T05:58:39.063942374Z,fatima.test@local.com,Fatima,Zahra,Direction
+If4gLn4,Email Sent,,0,0,2026-08-30T05:58:39.205371325Z,false,2026-08-30T05:58:39.205371325Z,karim.test@local.com,Karim,Idrissi,Assistanat
+SIlCGnk,Email Sent,,0,0,2026-08-30T05:58:39.318619249Z,false,2026-08-30T05:58:39.318619249Z,lina.test@local.com,Lina,Bouaziz,Commerce
+2TEy4wZ,Submitted Data,10.0.2.15,0,0,2026-08-30T05:58:39.568187857Z,false,2026-08-30T06:01:24.198622874Z,nadia.test@local.com,Nadia,Ouali,Marketing
+yJfukxa,Submitted Data,10.0.2.15,0,0,2026-08-30T05:58:39.979334685Z,false,2026-08-30T06:01:58.563005267Z,reda.test@local.com,Reda,El Fassi,Juridique
